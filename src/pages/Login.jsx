@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { recordUserData } from '../store/actions';
+import { recordUserData, requestToken } from '../store/actions';
 
 class Login extends React.Component {
   state = {
@@ -16,21 +16,22 @@ class Login extends React.Component {
   }
 
   handleChange = ({ target: { name, value } }) => {
-    this.setState({
+    this.setState(() => ({
       [name]: value,
-    });
-    this.validateInput();
+    }), this.validateInput);
   };
 
-  handleClick = () => {
-    const { dispatch } = this.props;
+  handleClick = async () => {
+    const { dispatch, history } = this.props;
     const { userName, userEmail } = this.state;
     dispatch(recordUserData({ userName, userEmail }));
-    // history push
+    await dispatch(requestToken());
+    history.push('/game');
   }
 
   render() {
     const { userName, userEmail, btnDisabled } = this.state;
+    const { history } = this.props;
     return (
       <div>
         <form>
@@ -56,6 +57,13 @@ class Login extends React.Component {
           >
             Play
           </button>
+          <button
+            type="button"
+            onClick={ () => history.push('/settings') }
+            data-testid="btn-settings"
+          >
+            Settings
+          </button>
         </form>
       </div>
     );
@@ -64,6 +72,7 @@ class Login extends React.Component {
 
 Login.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  history: PropTypes.shape().isRequired,
 };
 
 export default connect()(Login);
