@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { recordUserData, requestToken } from '../store/actions';
+import { recordUserData, requestToken } from '../redux/actions';
 
 class Login extends React.Component {
   state = {
