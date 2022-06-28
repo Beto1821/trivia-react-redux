@@ -21,12 +21,12 @@ class Login extends React.Component {
     }), this.validateInput);
   };
 
-  handleClick = async () => {
+  handleClick = () => {
     const { dispatch, history } = this.props;
     const { userName, userEmail } = this.state;
     dispatch(recordUserData({ userName, userEmail }));
-    await dispatch(requestToken());
-    history.push('/game');
+    dispatch(requestToken(history));
+    // history.push('/game');
   }
 
   render() {
