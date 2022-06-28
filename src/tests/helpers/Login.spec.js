@@ -1,6 +1,7 @@
 import React from 'react';
-import App from '../App';
-import renderWithRouterAndRedux from './helpers/renderWithRouterAndRedux';
+import App from '../../App';
+import { screen } from '@testing-library/react';
+import renderWithRouterAndRedux from '../helpers/renderWithRouterAndRedux';
 import userEvent from '@testing-library/user-event';
 
 describe('teste página de login', () => {
@@ -71,7 +72,7 @@ describe('teste página de login', () => {
    test('Verifique se a validação está funcionando - inputName certo', () => {
     renderWithRouterAndRedux(<App />);
  
-    const inputName = screen.getByTestId('input-player-name');
+     const inputName = screen.getByTestId('input-player-name');
      expect(inputName).toBeInTheDocument();
      const inputEmail = screen.getByTestId('input-gravatar-email');
      expect(inputEmail).toBeInTheDocument();
@@ -82,7 +83,7 @@ describe('teste página de login', () => {
      userEvent.type(inputName, 'Henrique');
      userEvent.type(inputEmail, 'teste@trybm');
  
-     expect(buttonPlay).toBeDisabled();     
+     expect(buttonPlay).not.toBeDisabled();     
          
    });
 
