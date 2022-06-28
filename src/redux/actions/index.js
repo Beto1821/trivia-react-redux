@@ -10,11 +10,12 @@ const saveToken = (payload) => ({
   userToken: payload,
 });
 
-export const requestToken = () => (dispatch) => {
+export const requestToken = (history) => (dispatch) => {
   fetch('https://opentdb.com/api_token.php?command=request')
     .then((response) => response.json())
     .then((data) => {
       dispatch(saveToken(data));
       localStorage.setItem('token', data.token);
+      history.push('/game');
     });
 };

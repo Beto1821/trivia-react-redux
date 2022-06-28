@@ -3,6 +3,9 @@ import { RECORD_USER_DATA, SAVE_TOKEN } from '../actions';
 const INITIAL_STATE = {
   userName: '',
   userEmail: '',
+  userToken: {
+    token: '',
+  },
 };
 
 const login = (state = INITIAL_STATE, action) => {
