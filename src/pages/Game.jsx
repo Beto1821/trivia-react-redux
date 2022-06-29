@@ -26,22 +26,39 @@ class Game extends React.Component {
     console.log(result.results);
   }
 
+  checkAnswer = () => {
+    const { questions, index } = this.state;
+    const buttons = document.querySelectorAll('.btnAnswer');
+    buttons.forEach((button) => {
+      if (button.textContent === questions[index].correct_answer) {
+        button.style = 'border: 3px solid rgb(6, 240, 15)';
+      } else {
+        button.style = 'border: 3px solid red';
+      }
+    });
+  }
+
   shuffleAnswers = () => {
     const { questions, index } = this.state;
     const array = questions[index].incorrect_answers.map((answer, i) => (
       <button
         key={ i }
+        className="btnAnswer"
         data-testid={ `wrong-answer-${i}` }
         type="button"
+        onClick={ this.checkAnswer }
       >
         { answer }
       </button>
     ));
+
     array.push(
       <button
         type="button"
         key="4"
         data-testid="correct-answer"
+        className="btnAnswer"
+        onClick={ this.checkAnswer }
       >
         {questions[index].correct_answer}
       </button>,
