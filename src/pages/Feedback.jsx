@@ -1,43 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import md5 from 'crypto-js/md5';
+import Header from '../components/Header';
 
 class Feedback extends React.Component {
   render() {
-    const { name, score, gravatarEmail, rightAnswers } = this.props;
-    const hashEmail = md5(gravatarEmail.trim().toLowerCase()).toString();
-
+    const { assertions, score } = this.props;
     return (
       <div>
-        <h1>Feedback Page</h1>
-        <img
-          src={ `https://www.gravatar.com/avatar/${hashEmail}` }
-          alt="user"
-          data-testid="header-profile-picture"
-        />
-        <p data-testid="header-player-name">{name}</p>
-        <p data-testid="header-score">{score}</p>
+        <Header />
         <h2 data-testid="feedback-text">
-          {rightAnswers < +'3' ? 'Could be better...' : 'Well Done!'}
+          {assertions < +'3' ? 'Could be better...' : 'Well Done!'}
         </h2>
+        <p data-testid="feedback-total-score">{score}</p>
+        <p data-testid="feedback-total-question">{assertions}</p>
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  name: state.login.userName,
+  assertions: state.player.assertions,
   score: state.player.score,
-  gravatarEmail: state.login.userEmail,
-  rightAnswers: state.player.rightAnswers,
 });
 
 Feedback.propTypes = {
-  name: PropTypes.string.isRequired,
+  assertions: PropTypes.number.isRequired,
   score: PropTypes.number.isRequired,
-  gravatarEmail: PropTypes.string.isRequired,
-  rightAnswers: PropTypes.number.isRequired,
 };
 
 export default connect(mapStateToProps)(Feedback);
