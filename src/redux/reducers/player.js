@@ -1,4 +1,4 @@
-import { UPDATE_SCORE } from '../actions';
+import { UPDATE_SCORE, PLAY_AGAIN } from '../actions';
 
 const INITIAL_STATE = {
   name: '',
@@ -15,6 +15,8 @@ const player = (state = INITIAL_STATE, action) => {
       score: state.score + action.score,
       assertions: state.assertions + 1,
     };
+  case PLAY_AGAIN:
+    return INITIAL_STATE;
   default:
     return state;
   }

@@ -4,6 +4,18 @@ import { connect } from 'react-redux';
 import md5 from 'crypto-js/md5';
 
 class Header extends React.Component {
+  componentDidMount() {
+    const { name, score, gravatarEmail } = this.props;
+    const picture = `https://www.gravatar.com/avatar/${md5(gravatarEmail.trim().toLowerCase()).toString()}`;
+    const ranking = localStorage.getItem('ranking');
+    if (ranking) {
+      localStorage.setItem('ranking',
+        JSON.stringify([...JSON.parse(ranking), { name, score, picture }]));
+    } else {
+      localStorage.setItem('ranking', JSON.stringify([{ name, score, picture }]));
+    }
+  }
+
   render() {
     const { name, score, gravatarEmail } = this.props;
     const hashEmail = md5(gravatarEmail.trim().toLowerCase()).toString();

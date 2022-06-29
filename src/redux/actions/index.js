@@ -1,6 +1,8 @@
 export const RECORD_USER_DATA = 'RECORD_USER_DATA';
 export const SAVE_TOKEN = 'SAVE_TOKEN';
 export const UPDATE_SCORE = 'UPDATE_SCORE';
+export const PLAY_AGAIN = 'PLAY_AGAIN';
+
 export const recordUserData = (payload) => ({
   type: RECORD_USER_DATA,
   userData: payload,
@@ -25,3 +27,7 @@ export const updateScore = (score) => ({
   type: UPDATE_SCORE,
   score,
 });
+
+export const playAgain = {
+  type: PLAY_AGAIN,
+};
