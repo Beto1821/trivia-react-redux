@@ -21,7 +21,7 @@ export const requestToken = (history) => (dispatch) => {
     });
 };
 
-export const updateScore = (payload) => ({
+export const updateScore = (score) => ({
   type: UPDATE_SCORE,
-  score: payload,
+  score,
 });

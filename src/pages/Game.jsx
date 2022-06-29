@@ -107,7 +107,6 @@ class Game extends React.Component {
     if (time === +'0') {
       clearInterval(timeId);
       this.paintBorder();
-      // this.disableButtons(true);
       this.setState({ showNextBtn: true });
     } else {
       this.setState((prev) => ({
