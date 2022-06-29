@@ -1,5 +1,6 @@
 export const RECORD_USER_DATA = 'RECORD_USER_DATA';
 export const SAVE_TOKEN = 'SAVE_TOKEN';
+export const UPDATE_SCORE = 'UPDATE_SCORE';
 export const recordUserData = (payload) => ({
   type: RECORD_USER_DATA,
   userData: payload,
@@ -19,3 +20,8 @@ export const requestToken = (history) => (dispatch) => {
       history.push('/game');
     });
 };
+
+export const updateScore = (payload) => ({
+  type: UPDATE_SCORE,
+  score: payload,
+});

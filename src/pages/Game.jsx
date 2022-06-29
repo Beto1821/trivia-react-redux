@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import md5 from 'crypto-js/md5';
 import PropTypes from 'prop-types';
+import { updateScore } from '../redux/actions';
 
 class Game extends React.Component {
   state = {
@@ -32,7 +33,7 @@ class Game extends React.Component {
     this.setState({ randomArray });
   }
 
-  checkAnswer = () => {
+  changeBorder = () => {
     const { questions, index } = this.state;
     const buttons = document.querySelectorAll('.btnAnswer');
     buttons.forEach((button) => {
@@ -42,6 +43,22 @@ class Game extends React.Component {
         button.style = 'border: 3px solid red';
       }
     });
+  }
+
+  checkAnswer = ({ target: { textContent } }) => {
+    const { questions, index, time } = this.state;
+    const { dispatch } = this.props;
+    const multiplier = {
+      hard: 3,
+      medium: 2,
+      easy: 1,
+    };
+    if (textContent === questions[index].correct_answer) {
+      dispatch(updateScore(
+        +'10' + (time * multiplier[questions[index].difficulty]),
+      ));
+    }
+    this.changeBorder();
   }
 
   disableButtons = () => {
@@ -84,7 +101,7 @@ class Game extends React.Component {
     const { time, timeId } = this.state;
     if (time === +'0') {
       clearInterval(timeId);
-      this.checkAnswer();
+      this.changeBorder();
       this.disableButtons();
     } else {
       this.setState((prev) => ({
@@ -138,6 +155,7 @@ Game.propTypes = {
   name: PropTypes.string.isRequired,
   token: PropTypes.string.isRequired,
   history: PropTypes.shape().isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps)(Game);
