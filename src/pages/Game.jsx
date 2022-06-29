@@ -11,6 +11,7 @@ class Game extends React.Component {
     time: 30,
     timeId: '',
     randomArray: [],
+    showNextBtn: false,
   };
 
   async componentDidMount() {
@@ -33,7 +34,7 @@ class Game extends React.Component {
     this.setState({ randomArray });
   }
 
-  changeBorder = () => {
+  paintBorder = () => {
     const { questions, index } = this.state;
     const buttons = document.querySelectorAll('.btnAnswer');
     buttons.forEach((button) => {
@@ -42,11 +43,20 @@ class Game extends React.Component {
       } else {
         button.style = 'border: 3px solid red';
       }
+      button.disabled = true;
+    });
+  }
+
+  removeBorder = () => {
+    const buttons = document.querySelectorAll('.btnAnswer');
+    buttons.forEach((button) => {
+      button.style = '';
+      button.disabled = false;
     });
   }
 
   checkAnswer = ({ target: { textContent } }) => {
-    const { questions, index, time } = this.state;
+    const { questions, index, time, timeId } = this.state;
     const { dispatch } = this.props;
     const multiplier = {
       hard: 3,
@@ -58,15 +68,17 @@ class Game extends React.Component {
         +'10' + (time * multiplier[questions[index].difficulty]),
       ));
     }
-    this.changeBorder();
+    this.paintBorder();
+    this.setState({ showNextBtn: true });
+    clearInterval(timeId);
   }
 
-  disableButtons = () => {
-    const buttons = document.querySelectorAll('.btnAnswer');
-    buttons.forEach((button) => {
-      button.disabled = true;
-    });
-  }
+  // disableButtons = (arg) => {
+  //   const buttons = document.querySelectorAll('.btnAnswer');
+  //   buttons.forEach((button) => {
+  //     button.disabled = arg;
+  //   });
+  // }
 
   shuffleAnswers = () => {
     const { questions, index } = this.state;
@@ -101,8 +113,9 @@ class Game extends React.Component {
     const { time, timeId } = this.state;
     if (time === +'0') {
       clearInterval(timeId);
-      this.changeBorder();
-      this.disableButtons();
+      this.paintBorder();
+      // this.disableButtons(true);
+      this.setState({ showNextBtn: true });
     } else {
       this.setState((prev) => ({
         time: prev.time - 1,
@@ -110,9 +123,28 @@ class Game extends React.Component {
     }
   }
 
+  nextQuestion = () => {
+    const { history } = this.props;
+    const { index } = this.state;
+    if (index === +'4') {
+      history.push('/feedback');
+    } else {
+      this.setState((prev) => ({
+        index: prev.index + 1,
+        time: 30,
+      }), () => {
+        const timeId = setInterval(this.countdown, +'1000');
+        const randomArray = this.shuffleAnswers();
+        this.setState({ randomArray, timeId, showNextBtn: false });
+      });
+    }
+
+    this.removeBorder();
+  }
+
   render() {
     const { gravatarEmail, score, name } = this.props;
-    const { questions, index, time, randomArray } = this.state;
+    const { questions, index, time, randomArray, showNextBtn } = this.state;
     const hashEmail = md5(gravatarEmail.trim().toLowerCase()).toString();
     return (
       <div>
@@ -134,6 +166,17 @@ class Game extends React.Component {
           <div>
             <h2>Temporizador</h2>
             <p>{time}</p>
+          </div>
+          <div>
+            { showNextBtn && (
+              <button
+                data-testid="btn-next"
+                type="button"
+                onClick={ this.nextQuestion }
+              >
+                Next
+              </button>
+            )}
           </div>
         </main>
       </div>
