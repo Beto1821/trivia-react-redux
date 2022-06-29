@@ -73,13 +73,6 @@ class Game extends React.Component {
     clearInterval(timeId);
   }
 
-  // disableButtons = (arg) => {
-  //   const buttons = document.querySelectorAll('.btnAnswer');
-  //   buttons.forEach((button) => {
-  //     button.disabled = arg;
-  //   });
-  // }
-
   shuffleAnswers = () => {
     const { questions, index } = this.state;
     const array = questions[index].incorrect_answers.map((answer, i) => (
@@ -114,7 +107,6 @@ class Game extends React.Component {
     if (time === +'0') {
       clearInterval(timeId);
       this.paintBorder();
-      // this.disableButtons(true);
       this.setState({ showNextBtn: true });
     } else {
       this.setState((prev) => ({

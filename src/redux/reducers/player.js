@@ -10,7 +10,11 @@ const INITIAL_STATE = {
 const player = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case UPDATE_SCORE:
-    return { ...state, score: state.score + action.score };
+    return {
+      ...state,
+      score: state.score + action.score,
+      assertions: state.assertions + 1,
+    };
   default:
     return state;
   }
