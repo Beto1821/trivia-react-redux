@@ -157,7 +157,7 @@ class Game extends React.Component {
           </div>
           <div>
             <h2>Temporizador</h2>
-            <p>{time}</p>
+            <p data-testid="timer-count">{time}</p>
           </div>
           <div>
             { showNextBtn && (
