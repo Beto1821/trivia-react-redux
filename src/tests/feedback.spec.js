@@ -17,6 +17,9 @@ describe('Teste Pagina de Feedback', () => {
     };
 
     const { history } =  renderWithRouterAndRedux(<App />, initialState, '/feedback');
+
+    const { pathname } = history.location;
+    expect(pathname).toBe('/feedback'); 
     
     const buttonPlayAgain = screen.getByRole("button", { name: /Play Again/i }); 
     
@@ -49,7 +52,7 @@ describe('Teste Pagina de Feedback', () => {
     
     expect(history.location.pathname).toBe('/ranking');
 
-    const buttonPlayAgain= screen.getByRole("button", {name: /Jogar novamente/i}); 
+    const buttonPlayAgain= screen.getByRole("button", {name: /go to home/i}); 
     
     expect(buttonPlayAgain).toBeInTheDocument(); 
   });
