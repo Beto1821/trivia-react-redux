@@ -7,11 +7,13 @@ class Game extends React.Component {
   state = {
     questions: [{ incorrect_answers: [], category: '', questions: [] }],
     index: 0,
+    time: 30,
+    timeId: '',
+    randomArray: [],
   };
 
   async componentDidMount() {
     const { token, history } = this.props;
-    // const token = localStorage.getItem('token');
     const response = await fetch(
       `https://opentdb.com/api.php?amount=5&token=${token}`,
     );
@@ -24,6 +26,10 @@ class Game extends React.Component {
       this.setState({ questions: result.results });
     }
     console.log(result.results);
+    const timeId = setInterval(this.countdown, +'1000');
+    this.setState({ timeId });
+    const randomArray = this.shuffleAnswers();
+    this.setState({ randomArray });
   }
 
   checkAnswer = () => {
@@ -35,6 +41,13 @@ class Game extends React.Component {
       } else {
         button.style = 'border: 3px solid red';
       }
+    });
+  }
+
+  disableButtons = () => {
+    const buttons = document.querySelectorAll('.btnAnswer');
+    buttons.forEach((button) => {
+      button.disabled = true;
     });
   }
 
@@ -67,11 +80,23 @@ class Game extends React.Component {
     return shuffled;
   }
 
+  countdown = () => {
+    const { time, timeId } = this.state;
+    if (time === +'0') {
+      clearInterval(timeId);
+      this.checkAnswer();
+      this.disableButtons();
+    } else {
+      this.setState((prev) => ({
+        time: prev.time - 1,
+      }));
+    }
+  }
+
   render() {
     const { gravatarEmail, score, name } = this.props;
-    const { questions, index } = this.state;
+    const { questions, index, time, randomArray } = this.state;
     const hashEmail = md5(gravatarEmail.trim().toLowerCase()).toString();
-    const randomArray = this.shuffleAnswers();
     return (
       <div>
         <header>
@@ -88,6 +113,10 @@ class Game extends React.Component {
           <p data-testid="question-text">{questions[index].question}</p>
           <div data-testid="answer-options">
             {randomArray}
+          </div>
+          <div>
+            <h2>Temporizador</h2>
+            <p>{time}</p>
           </div>
         </main>
       </div>
