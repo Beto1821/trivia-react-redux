@@ -7,8 +7,10 @@ import { response, failedQuestionMock } from '../tests/mocks/requestApi';
 import Game from '../pages/Game';
 afterEach(() => jest.clearAllMocks());
 
+const MAX_TIMEOUT = 40000;
 describe('Teste da Pagina do Jogo', () => {
   beforeEach(cleanup);
+  
   test('Verifica se Game renderiza corretamente', async () => {
     response.results[0].correct_answer = 'A crowbar';
     renderWithRouterAndRedux(<Game />);
@@ -128,5 +130,5 @@ describe('Teste da Pagina do Jogo', () => {
     expect(history.location.pathname).toBe('/')
     }); 
   });
-});
 
+});
