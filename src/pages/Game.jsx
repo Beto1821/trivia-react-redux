@@ -27,7 +27,6 @@ class Game extends React.Component {
     } else {
       this.setState({ questions: result.results });
     }
-    console.log(result.results);
     const timeId = setInterval(this.countdown, +'1000');
     this.setState({ timeId });
     const randomArray = this.shuffleAnswers();

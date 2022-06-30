@@ -11,3 +11,8 @@ export const response = {
     },
   ],
 };
+
+export const failedQuestionMock = {
+  response_code: 3,
+  results: [],
+  }; 
