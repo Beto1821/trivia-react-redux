@@ -1,19 +1,17 @@
 import React from 'react';
 import renderWithRouterAndRedux from './helpers/renderWithRouterAndRedux';
 import userEvent from '@testing-library/user-event';
-import { screen } from '@testing-library/react';
+import { screen, waitFor, cleanup } from '@testing-library/react';
 import App from '../App';
+import { response, failedQuestionMock } from '../tests/mocks/requestApi';
 import Game from '../pages/Game';
-import { response } from '../tests/mocks/requestApi';
 afterEach(() => jest.clearAllMocks());
 
 describe('Teste da Pagina do Jogo', () => {
+  beforeEach(cleanup);
   test('Verifica se Game renderiza corretamente', async () => {
     response.results[0].correct_answer = 'A crowbar';
-    const { history } = renderWithRouterAndRedux(<App />);
-    history.push('/game')
-    const { pathname } = history.location;
-    expect(pathname).toBe('/game'); 
+    renderWithRouterAndRedux(<Game />);
     const img = await screen.findByAltText('user');
     await expect(img).toBeInTheDocument();
 
@@ -41,7 +39,7 @@ describe('Teste da Pagina do Jogo', () => {
   });
 
   test('Verifique se o seletor de borda funciona', async () => {
-    const { history } = renderWithRouterAndRedux(<Game />);
+    renderWithRouterAndRedux(<Game />, {}, '/game');
     
     const buttonTrue = await screen.findByTestId('correct-answer')
     await expect(buttonTrue).toBeInTheDocument();
@@ -63,26 +61,6 @@ describe('Teste da Pagina do Jogo', () => {
     await expect(buttonsFalse[0]).not.toHaveAttribute();
   });
 
-  test('Verifique se o botão Próximo redireciona para Feedback após a última pergunta', async () => {
-    const { history } = renderWithRouterAndRedux(<App />);
-    history.push('/game')
-
-    const buttonTrue = await screen.findByTestId('correct-answer')
-    await expect(buttonTrue).toBeInTheDocument();
-    userEvent.click(buttonTrue);
-
-    const buttonNext = await screen.findByTestId(/btn-next/i);
-    userEvent.click(buttonNext);
-
-    history.push('/feedback') 
-
-    const namePlayer = screen.getByRole('heading', {
-      name: /feedback page/i
-    });
-    expect(namePlayer).toBeInTheDocument;
-
-  });
-
   test('Verifica os pontos ao clicar na resposta correta - fácil', async () => {
     global.fetch = jest.fn(() =>
       Promise.resolve({
@@ -90,16 +68,7 @@ describe('Teste da Pagina do Jogo', () => {
       })
     );
 
-    const initialState = {
-      player: {
-        name: 'teste',
-        gravatarEmail: 'teste@teste.com',
-        score: 0,
-        assertions: 0,
-      },
-    };
-
-    const { store } = renderWithRouterAndRedux(<Game />, initialState, '/game');
+    const { store } = renderWithRouterAndRedux(<Game />);
 
     const buttonTrue = await screen.findByTestId('correct-answer');
     userEvent.click(buttonTrue);
@@ -115,16 +84,7 @@ describe('Teste da Pagina do Jogo', () => {
       })
     );
 
-    const initialState = {
-      player: {
-        name: 'teste',
-        gravatarEmail: 'teste@teste.com',
-        score: 0,
-        assertions: 0,
-      },
-    };
-
-    const { store } = renderWithRouterAndRedux(<Game />, initialState, '/game');
+    const { store } = renderWithRouterAndRedux(<Game />);
 
     const buttonTrue = await screen.findByTestId('correct-answer');
     userEvent.click(buttonTrue);
@@ -140,20 +100,33 @@ describe('Teste da Pagina do Jogo', () => {
       })
     );
 
-    const initialState = {
-      player: {
-        name: 'teste',
-        gravatarEmail: 'teste@teste.com',
-        score: 0,
-        assertions: 0,
-      },
-    };
-
-    const { store } = renderWithRouterAndRedux(<Game />, initialState, '/game');
+    const { store } = renderWithRouterAndRedux(<Game />);
 
     const buttonTrue = await screen.findByTestId('correct-answer');
     userEvent.click(buttonTrue);
 
     expect(store.getState().player.score).toBe(100);
   });
+
+  test('Verifica se o token inválido redireciona para a página de login', async () => {
+    global.fetch = jest.fn(() => Promise.resolve(({
+    json: () => Promise.resolve(failedQuestionMock)
+    })))
+    
+    const { history } = renderWithRouterAndRedux(<App />);
+    
+    const inputName = screen.getByTestId("input-player-name");
+    const inputEmail = screen.getByTestId("input-gravatar-email");
+    const btnLogin = screen.getByTestId("btn-play");
+    
+    userEvent.type(inputName, 'teste');
+    userEvent.type(inputEmail, 'teste@teste.com');
+    
+    userEvent.click(btnLogin);
+    
+    await waitFor(() => {
+    expect(history.location.pathname).toBe('/')
+    }); 
+  });
 });
+
