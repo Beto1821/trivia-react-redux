@@ -1,7 +1,7 @@
 body {
-  animation: Animation 20s ease infinite;
+  animation: Animation 10s ease infinite;
   background: linear-gradient(45deg, #9aa5ff, #fb99d3, #ffb6a9, #ffe1ad, #dcface);
-  background-size: 500% 500%;
+  background-size: 200% 200%;
   text-align: center;
 }
 
