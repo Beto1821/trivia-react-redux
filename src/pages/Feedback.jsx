@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
 import { playAgain } from '../redux/actions';
+import './Feedback.css';
 
 class Feedback extends React.Component {
   playAgain = () => {
@@ -14,7 +15,7 @@ class Feedback extends React.Component {
   render() {
     const { assertions, score, history } = this.props;
     return (
-      <div>
+      <div className="feedback">
         <Header />
         <h2 data-testid="feedback-text">
           {assertions < +'3' ? 'Could be better...' : 'Well Done!'}

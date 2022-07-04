@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import md5 from 'crypto-js/md5';
 import PropTypes from 'prop-types';
 import { updateScore } from '../redux/actions';
+import './Game.css';
 
 class Game extends React.Component {
   state = {
@@ -117,7 +118,7 @@ class Game extends React.Component {
   nextQuestion = () => {
     const { history } = this.props;
     const { index } = this.state;
-    if (index === +'4') {
+    if (index === +'4') { .
       history.push('/feedback');
     } else {
       this.setState((prev) => ({
@@ -138,7 +139,7 @@ class Game extends React.Component {
     const { questions, index, time, randomArray, showNextBtn } = this.state;
     const hashEmail = md5(gravatarEmail.trim().toLowerCase()).toString();
     return (
-      <div>
+      <div className="container-game">
         <header>
           <img
             src={ `https://www.gravatar.com/avatar/${hashEmail}` }
@@ -148,28 +149,29 @@ class Game extends React.Component {
           <p data-testid="header-player-name">{name}</p>
           <p data-testid="header-score">{score}</p>
         </header>
-        <main>
+        <div className="question-bck">
+          <div className="question" />
           <h2 data-testid="question-category">{questions[index].category}</h2>
           <p data-testid="question-text">{questions[index].question}</p>
-          <div data-testid="answer-options">
+          <div data-testid="answer-options" className="options">
             {randomArray}
           </div>
-          <div>
-            <h2>Temporizador</h2>
-            <p data-testid="timer-count">{time}</p>
-          </div>
-          <div>
-            { showNextBtn && (
-              <button
-                data-testid="btn-next"
-                type="button"
-                onClick={ this.nextQuestion }
-              >
-                Next
-              </button>
-            )}
-          </div>
-        </main>
+        </div>
+        <div className="timer">
+          <h2>Timer</h2>
+          <p data-testid="timer-count">{time}</p>
+        </div>
+        <div>
+          { showNextBtn && (
+            <button
+              data-testid="btn-next"
+              type="button"
+              onClick={ this.nextQuestion }
+            >
+              Next
+            </button>
+          )}
+        </div>
       </div>
     );
   }

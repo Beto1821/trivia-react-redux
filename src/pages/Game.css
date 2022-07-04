@@ -1,0 +1,147 @@
+body {
+  animation: Animation 20s ease infinite;
+  background: linear-gradient(45deg, #9aa5ff, #fb99d3, #ffb6a9, #ffe1ad, #dcface);
+  background-size: 500% 500%;
+  text-align: center;
+}
+
+@keyframes Animation {
+
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.container-game {
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px , rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 30px auto;
+  padding: 15px;
+  gap: 15px;
+  width: 80vw;
+  max-width: 720px;
+  animation: Animation 5s ease infinite;
+  background: linear-gradient(45deg, #9aa5ff, #fb99d3, #ffb6a9, #ffe1ad, #dcface);
+  background-size: 250% 250%;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+header img {
+  border-radius: 20px;
+}
+
+.question-bck{
+  opacity: 1;
+  position: relative;
+  font-size: 1rem;
+  text-align: center;
+  z-index: 0;
+  width: 95%;
+  height: 100%;
+}
+
+.question {
+  opacity: 0.4;
+  position: absolute;
+  background: url("https://img.olhardigital.com.br/wp-content/uploads/2022/03/trivia-quest-1080x450.jpg");
+  background-origin: content-box;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  border-radius: 20px;
+}
+
+.question-bck h2, p {
+  width: 95%;
+  margin: 10px auto;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  align-items: center;
+  gap: 10px;
+  margin: 10px auto;
+}
+
+
+.timer {
+  background: url("https://c.tenor.com/XXEa3oevW4YAAAAC/trivia-game.gif");
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  margin: 30px;
+  padding: 100px;
+  position: relative;
+  width: 70%;
+}
+
+.timer p {
+  font-size: 2rem;
+  position:absolute;
+  top: 30px;
+  left: 319px;
+  background-color: aliceblue;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+}
+
+.timer h2 {
+  position: absolute;
+  top: 10px;
+  left: 30px;
+}
+
+button {
+  margin: 10px;
+  padding: 15px 30px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 10px;
+  display: block;
+  border: 0px;
+  font-weight: 700;
+  box-shadow: 0px 0px 14px -7px #f09819;
+  background-image: linear-gradient(45deg, #FF512F 0%, #F09819  51%, #FF512F  100%);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+button:hover {
+  background-position: right center;
+  /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+

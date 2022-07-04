@@ -1,0 +1,59 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap") ;
+
+section {
+  border-radius: 20px;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  margin: 10% auto;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  background-color: rgb(33, 4, 32);
+}
+
+.login {
+  font-size: 2rem;
+  padding: 10px;
+  color: aliceblue;
+}
+
+.container {
+  border-radius: 20px 0px 0px 20px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  
+}
+
+.input-form {
+  background: transparent;
+  display: block;
+  font-size: 18px;
+  height: 52px;
+  line-height: 1.2;
+  padding: 15px;
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  border: none;
+  border-bottom: 2px solid rgb(167, 122, 155);
+  color: antiquewhite;
+}
+
+.input-form::placeholder {
+  color: antiquewhite;
+}
+
+.btn-login {
+  width: 40%;
+}
+
+img {
+  border-radius: 0px 20px 20px 0px;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 40px;
+}
