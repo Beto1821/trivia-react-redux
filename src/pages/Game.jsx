@@ -34,14 +34,20 @@ class Game extends React.Component {
     this.setState({ randomArray });
   }
 
+  decodeEntity = (inputStr) => {
+    const textarea = document.createElement('textarea');
+    textarea.innerHTML = inputStr;
+    return textarea.value;
+  }
+
   paintBorder = () => {
     const { questions, index } = this.state;
     const buttons = document.querySelectorAll('.btnAnswer');
     buttons.forEach((button) => {
       if (button.textContent === questions[index].correct_answer) {
-        button.style = 'border: 3px solid rgb(6, 240, 15)';
+        button.style = 'border: 5px solid rgb(6, 240, 15)';
       } else {
-        button.style = 'border: 3px solid red';
+        button.style = 'border: 5px solid red';
       }
       button.disabled = true;
     });
@@ -152,7 +158,7 @@ class Game extends React.Component {
         <div className="question-bck">
           <div className="question" />
           <h2 data-testid="question-category">{questions[index].category}</h2>
-          <p data-testid="question-text">{questions[index].question}</p>
+          <p data-testid="question-text">{this.decodeEntity(questions[index].question)}</p>
           <div data-testid="answer-options" className="options">
             {randomArray}
           </div>
