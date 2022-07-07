@@ -11,13 +11,13 @@
 }
 
 .rank0 {
-  background-color: gold;
+  background: linear-gradient(90deg, black 60%, goldenrod 100%); 
 }
 
 .rank1 {
-  background-color: silver;
+  background: linear-gradient(90deg, black 60%,  silver 100%); 
 }
 
 .rank2 {
-  background-color: rgb(248, 135, 6)
+  background: linear-gradient(90deg, black 60%, rgb(248, 135, 6) 100%); 
 }
