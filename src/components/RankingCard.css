@@ -9,3 +9,15 @@
   left: 100px;
   padding: 10px;
 }
+
+.rank0 {
+  background-color: gold;
+}
+
+.rank1 {
+  background-color: silver;
+}
+
+.rank2 {
+  background-color: goldenrod
+}

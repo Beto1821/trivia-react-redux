@@ -7,7 +7,7 @@ class RankingCard extends React.Component {
     const { player, index } = this.props;
     const { name, picture, score } = player;
     return (
-      <div className="ranking">
+      <div className={ `ranking rank${index}` }>
         <img src={ picture } alt={ `foto do player ${name}` } />
         <h3 data-testid={ `player-name-${index}` }>{name}</h3>
         <p data-testid={ `player-score-${index}` }>
