@@ -1,5 +1,5 @@
 .ranking {
-  border: 3px solid black;
+  border: 3px solid rgb(163, 153, 153);
   width: 40%;
   margin: 10px auto;
   display: flex;
@@ -11,13 +11,13 @@
 }
 
 .rank0 {
-  background: linear-gradient(90deg, black 60%, goldenrod 100%); 
+  background: linear-gradient(90deg, rgb(227, 219, 224) 5%, rgb(226, 163, 4) 100%);
 }
 
 .rank1 {
-  background: linear-gradient(90deg, black 60%,  silver 100%); 
+  background: linear-gradient(90deg, rgb(227, 219, 224) 5%,  rgb(178, 171, 171) 100%);
 }
 
 .rank2 {
-  background: linear-gradient(90deg, black 60%, rgb(248, 135, 6) 100%); 
+  background: linear-gradient(90deg, rgb(227, 219, 224) 5%, rgb(103, 55, 0) 100%);
 }
