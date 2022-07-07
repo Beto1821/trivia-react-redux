@@ -21,11 +21,12 @@ class Ranking extends React.Component {
           <RankingCard key={ index } player={ player } index={ index } />
         ))}
         <button
+          className="ranking"
           type="button"
           data-testid="btn-go-home"
           onClick={ this.playAgain }
         >
-          Go to home
+          Jogar novamente!!
         </button>
       </div>
     );
