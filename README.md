@@ -192,38 +192,44 @@ A pontuação é calculada com base em:
 
 ---
 
-## 🤝 Contribuindo
-
-Contribuições são sempre bem-vindas! Para contribuir:
-
-1. Faça um Fork do projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/MinhaFeature`)
-3. Commit suas mudanças (`git commit -m 'Adiciona MinhaFeature'`)
-4. Push para a branch (`git push origin feature/MinhaFeature`)
-5. Abra um Pull Request
-
----
-
 ## 📝 Licença
 
 Este projeto foi desenvolvido como parte do curso da [Trybe](https://www.betrybe.com/).
 
 ---
 
-## 👨‍💻 Autor
+## � Contribuidores
 
-**Beto1821**
+Este projeto foi desenvolvido em grupo com a colaboração de:
 
-- GitHub: [@Beto1821](https://github.com/Beto1821)
-- LinkedIn: [Alberto Candioto](https://www.linkedin.com/in/alberto-candioto/)
-
----
-
-## 🙏 Agradecimentos
-
-- [Open Trivia Database](https://opentdb.com/) pela API de perguntas
-- [Trybe](https://www.betrybe.com/) pelo projeto e aprendizado
-- Comunidade open source pelas ferramentas incríveis
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/Beto1821">
+        <img src="https://github.com/Beto1821.png" width="100px;" alt="Beto1821"/><br>
+        <sub><b>Adalberto R. Ribeiro</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/henriqueambrosano">
+        <img src="https://github.com/henriqueambrosano.png" width="100px;" alt="Henrique Ambrosano"/><br>
+        <sub><b>Henrique Ambrosano</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/ThiagoGasparini">
+        <img src="https://github.com/ThiagoGasparini.png" width="100px;" alt="Thiago Gasparini"/><br>
+        <sub><b>Thiago Gasparini</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/trybe-tech-ops">
+        <img src="https://github.com/trybe-tech-ops.png" width="100px;" alt="Trybe Tech Ops"/><br>
+        <sub><b>Trybe Tech Ops</b></sub>
+      </a>
+    </td>
+  </tr>
+</table>
 
 ---
 
